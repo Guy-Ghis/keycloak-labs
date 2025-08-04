@@ -45,7 +45,7 @@ Demonstrates the session fixation vulnerability where attackers can force users 
 1. **Clone the repository:**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Guy-Ghis/keycloak-labs.git
    cd keycloak-labs
    ```
 
