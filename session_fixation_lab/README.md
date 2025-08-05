@@ -179,3 +179,7 @@ app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # Mitigate CSRF attacks
 ## ⚠️ Disclaimer
 
 This lab is for educational purposes only. The vulnerable application is intentionally insecure and should never be used in production environments.
+
+---
+
+### Happy SFA Learning! 🔐🚀
