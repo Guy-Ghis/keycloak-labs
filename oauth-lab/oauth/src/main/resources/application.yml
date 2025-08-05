@@ -1,0 +1,24 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:postgresql://10.153.115.29:5432/oauth-demo
+    driver-class-name: org.postgresql.Driver
+    username: ghis
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+keycloak:
+  realm: test-realm
+  auth-server-url: http://10.153.115.29:7000/realms/test-realm
+  client-id: test-app
+  client-secret: 3TUXidZQT4ZEqq4r2RlU6aU3tjbIG9Tj
+  redirect-uri: http://localhost:5173/callback
