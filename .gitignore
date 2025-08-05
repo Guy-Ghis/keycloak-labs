@@ -1,0 +1,33 @@
+# Created by https://www.gitignore.io
+# For a Java project with Gradle
+.gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# For IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# For VS Code
+.vscode/
+KEY*.md
+U*.md*
+t*.sh
+
+# For Node.js/React
+node_modules/
+.env
+*.log
+dist/
+public/
+tmp/
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.swn
