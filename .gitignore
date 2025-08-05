@@ -31,3 +31,5 @@ Thumbs.db
 *.swp
 *.swo
 *.swn
+# Ignore Python virtual environments
+session-fixation-lab/venv/
