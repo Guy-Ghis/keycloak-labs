@@ -4,7 +4,7 @@ A comprehensive collection of hands-on security labs focused on web application 
 
 ## 🎯 Purpose
 
-This repository is designed to help developers, security professionals, and students understand:
+This repository is designed to help developers, security profes$$sionals, and students understand:
 
 - **Common web vulnerabilities** and their exploitation techniques
 - **Secure coding practices** and defensive programming
@@ -31,6 +31,27 @@ Demonstrates the session fixation vulnerability where attackers can force users 
 - `vulnerable_app.py` - Intentionally vulnerable Flask application
 - `patched_app.py` - Secure implementation with fixes
 - `README.md` - Detailed lab instructions and explanations
+
+### 🔐 OAuth 2.0 Lab
+
+**Location:** [`oauth-lab/`](oauth-lab/README.md:1)
+
+Demonstrates a complete **OAuth 2.0 Authorization Code Flow** implementation using Spring Boot and React with Keycloak.
+
+**Key Learning Points:**
+
+- Understand OAuth 2.0 Authorization Code Flow
+- Implement secure authentication with Keycloak
+- Build a full-stack application (Spring Boot backend + React frontend)
+- JWT token handling and validation
+- Secure session management with OAuth
+
+**Files:**
+
+- [`oauth-lab/oauth/`](oauth-lab/oauth/src/main/java/com/demo/oauth/OauthBackendApplication.java:1)
+- [`oauth-lab/oauth-client/`](oauth-lab/oauth-client/src/App.tsx:1)
+- [`oauth-lab/oauth/OAuth_Flow_Guide.md`](oauth-lab/oauth/OAuth_Flow_Guide.md:1)
+- [`oauth-lab/oauth/TOKEN_VALIDATION_EXPLAINED.md`](oauth-lab/oauth/TOKEN_VALIDATION_EXPLAINED.md:1)
 
 ## 🛠️ Getting Started
 
