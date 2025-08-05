@@ -1,4 +1,4 @@
-#!/home/guy_ghis/projects/keycloak/oauth_flows/session_fixation_lab/venv/bin/python3
+#!/home/guy_ghis/projects/keycloak/oauth_flows/session-fixation-lab/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

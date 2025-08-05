@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/guy_ghis/projects/keycloak/oauth_flows/session_fixation_lab/venv
+set -gx VIRTUAL_ENV /home/guy_ghis/projects/keycloak/oauth_flows/session-fixation-lab/venv
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH

@@ -15,7 +15,7 @@ This repository is designed to help developers, security profes$$sionals, and st
 
 ### 🔐 Session Fixation Lab
 
-**Location:** `session_fixation_lab/`
+**Location:** `session-fixation-lab/`
 
 Demonstrates the session fixation vulnerability where attackers can force users to use specific session IDs, enabling session hijacking after authentication.
 
@@ -28,9 +28,9 @@ Demonstrates the session fixation vulnerability where attackers can force users 
 
 **Files:**
 
-- `vulnerable_app.py` - Intentionally vulnerable Flask application
-- `patched_app.py` - Secure implementation with fixes
-- `README.md` - Detailed lab instructions and explanations
+- [`vulnerable_app.py`](session-fixation_lab/vulnerable_app.py:1) - Intentionally vulnerable Flask application
+- [`patched_app.py`](session-fixation_lab/patched_app.py:1) - Secure implementation with fixes
+- [`README.md`](session-fixation_lab/README.md:1) - Detailed lab instructions and explanations
 
 ### 🔐 OAuth 2.0 Lab
 
@@ -48,10 +48,10 @@ Demonstrates a complete **OAuth 2.0 Authorization Code Flow** implementation usi
 
 **Files:**
 
-- [`oauth-lab/oauth/`](oauth-lab/oauth/src/main/java/com/demo/oauth/OauthBackendApplication.java:1)
-- [`oauth-lab/oauth-client/`](oauth-lab/oauth-client/src/App.tsx:1)
-- [`oauth-lab/oauth/OAuth_Flow_Guide.md`](oauth-lab/oauth/OAuth_Flow_Guide.md:1)
-- [`oauth-lab/oauth/TOKEN_VALIDATION_EXPLAINED.md`](oauth-lab/oauth/TOKEN_VALIDATION_EXPLAINED.md:1)
+- [`oauth-lab/oauth/`](oauth-lab/oauth/src/main/java/com/demo/oauth/OauthBackendApplication.java:1) - Spring Boot backend demonstrating the OAuth 2.0 authorization code flow
+- [`oauth-lab/oauth-client/`](oauth-lab/oauth-client/src/App.tsx:1) - React frontend application facilitating user authentication via Keycloak
+- [`oauth-lab/oauth/OAuth_Flow_Guide.md`](oauth-lab/oauth/OAuth_Flow_Guide.md:1) - In-depth guide explaining each step of the OAuth authorization flow
+- [`oauth-lab/oauth/TOKEN_VALIDATION_EXPLAINED.md`](oauth-lab/oauth/TOKEN_VALIDATION_EXPLAINED.md:1) - Documentation on validating JWT tokens and security considerations
 
 ## 🛠️ Getting Started
 
@@ -73,7 +73,7 @@ Demonstrates a complete **OAuth 2.0 Authorization Code Flow** implementation usi
 2. **Navigate to a specific lab:**
 
    ```bash
-   cd session_fixation_lab
+   cd session-fixation-lab
    ```
 
 3. **Follow the lab-specific instructions** in each lab's README.md file
@@ -83,7 +83,7 @@ Demonstrates a complete **OAuth 2.0 Authorization Code Flow** implementation usi
 ```plaintext
 keycloak-labs/
 ├── README.md                    # This file - repository overview
-├── session_fixation_lab/        # Session fixation vulnerability lab
+├── session-fixation-lab/        # Session fixation vulnerability lab
 │   ├── vulnerable_app.py       # Intentionally vulnerable application
 │   ├── patched_app.py          # Secure implementation
 │   ├── venv/                   # Python virtual environment

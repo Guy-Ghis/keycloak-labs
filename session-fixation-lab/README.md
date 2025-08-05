@@ -12,7 +12,7 @@ This lab demonstrates the **Session Fixation** vulnerability and its secure impl
 ## 📁 Lab Structure
 
 ```plaintext
-session_fixation_lab/
+session-fixation-lab/
 ├── vulnerable_app.py    # Intentionally vulnerable application
 ├── patched_app.py       # Secure implementation
 ├── venv/               # Python virtual environment
@@ -50,7 +50,7 @@ The `vulnerable_app.py` demonstrates these insecure practices:
 1. **Navigate to the lab directory:**
 
    ```bash
-   cd session_fixation_lab
+   cd session-fixation-lab
    ```
 
 2. **Create and activate virtual environment:**
