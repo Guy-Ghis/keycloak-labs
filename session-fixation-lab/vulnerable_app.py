@@ -1,12 +1,18 @@
+# Standard Flask imports: core app, templating, request/response handling, and session management
 from flask import Flask, render_template_string, request, session, redirect, url_for, make_response
+# UUID generation for creating session identifiers
 import uuid
+# Logging for debugging and tracing application flow
 import logging
 
+# Configure logging to output debug-level messages to the console
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
+# Hardcoded user store: in a real app this would be a database
 USERS = {"testuser": "password123"}
 
+# HTML template for the login page, styled with Tailwind CSS
 LOGIN_HTML = """
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +46,7 @@ LOGIN_HTML = """
 </html>
 """
 
+# HTML template for the home page, showing session details and a logout link
 INDEX_HTML = """
 <!DOCTYPE html>
 <html lang="en">
@@ -68,39 +75,52 @@ INDEX_HTML = """
 </html>
 """
 
+# Initialize Flask application
 app = Flask(__name__)
+# Secret key for signing Flask's session cookies (hardcoded insecurely for demonstration)
 app.secret_key = 'a_very_insecure_secret_key'
 
+# CustomSession class: represents a server-side session with an ID, authentication state, and username
 class CustomSession:
     def __init__(self, sid):
-        self.sid = sid
-        self.logged_in = False
-        self.username = None
+        self.sid = sid          # Unique session identifier
+        self.logged_in = False  # Authentication flag
+        self.username = None    # Username associated after login
 
+# In-memory store of active CustomSession objects, keyed by sid
 sessions = {}
 
 @app.before_request
 def before_request_func():
+    # Debug log of incoming cookies
     logger.debug(f"Before request: Cookies: {request.cookies}")
+
+    # Check if a session ID was provided via URL parameter (sid)
     if 'sid' in request.args:
         sid = request.args['sid']
         logger.debug(f"Session ID from URL: {sid}")
+        # Store the provided sid in Flask's session
         session['sid'] = sid
+        # Create a new CustomSession if not existing
         if sid not in sessions:
             sessions[sid] = CustomSession(sid)
+        # Sync Flask session flags with our CustomSession
         session['logged_in'] = sessions[sid].logged_in
         session['username'] = sessions[sid].username
         session.modified = True
+        # Redirect to the same path and set a cookie for future requests
         resp = make_response(redirect(request.path))
         resp.set_cookie('custom_session_id', sid)
         return resp
-    
-    # Prioritize custom_session_id cookie over new UUID
+
+    # No URL sid: prefer cookie 'custom_session_id', else fallback to existing Flask session sid or generate new UUID
     sid = request.cookies.get('custom_session_id')
     if not sid:
         sid = session.get('sid') or str(uuid.uuid4())
+    # Initialize CustomSession if needed
     if sid not in sessions:
         sessions[sid] = CustomSession(sid)
+    # Sync session values
     session['sid'] = sid
     session['logged_in'] = sessions[sid].logged_in
     session['username'] = sessions[sid].username
@@ -109,7 +129,9 @@ def before_request_func():
 
 @app.route('/')
 def index():
+    # Log current login state and session contents
     logger.debug(f"Index route: session.logged_in = {session.get('logged_in')}, session = {session}")
+    # If authenticated, render the protected page; otherwise redirect to login
     if session.get('logged_in'):
         return render_template_string(INDEX_HTML)
     return redirect(url_for('login'))
@@ -117,39 +139,51 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     message = None
+    # Process login form submission
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         logger.debug(f"Login attempt: username={username}, password={password}")
+        # Validate credentials against USERS store
         if USERS.get(username) == password:
+            # Reuse existing sid or generate a new one
             sid = session.get('sid') or str(uuid.uuid4())
             if sid not in sessions:
                 sessions[sid] = CustomSession(sid)
+            # Mark CustomSession as logged in and store username
             sessions[sid].logged_in = True
             sessions[sid].username = username
+            # Update Flask session
             session['sid'] = sid
             session['logged_in'] = True
             session['username'] = username
             session.modified = True
             logger.debug(f"Login successful: sid={sid}, session={session}")
+            # Redirect to index and set custom session cookie
             resp = make_response(redirect(url_for('index')))
             resp.set_cookie('custom_session_id', sid)
             return resp
         else:
+            # Invalid credentials path
             message = "Invalid credentials"
             logger.debug("Login failed: Invalid credentials")
+    # Render login page with optional error message
     return render_template_string(LOGIN_HTML, message=message)
 
 @app.route('/logout')
 def logout():
+    # Log logout event
     logger.debug(f"Logout: Clearing session for sid={session.get('sid')}")
     sid = session.get('sid')
+    # Remove server-side CustomSession
     if sid in sessions:
         sessions.pop(sid)
+    # Clear Flask session data and expire the cookie
     session.clear()
     resp = make_response(redirect(url_for('login')))
     resp.set_cookie('custom_session_id', '', expires=0)
     return resp
 
+# Entry point: start Flask development server when run directly
 if __name__ == '__main__':
     app.run(debug=True)
